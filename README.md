@@ -1,5 +1,13 @@
-## Lethal Company Sales Optimizer
+## Minimum Overshoot Subset Sum
 ---
-A small script that tries to calculate the minimum items to sell to meet the quota. Tries to get as close as possible to the quota without going under.
 
-Prioritizes selling smaller items first to reduce clutter.
+Given a list of numbers, calculate the minimum combination of items that sum up to reach a target number.
+
+Previously used to optimize sales for lethal company
+
+
+
+To Do:
+
+ 1. Custom Prioritization
+    - Currently sorting is done in `bag_list = sorted(bag_list)` sorting ascending prioritizes smaller numbers, sorting descending prioritizes larger numbers

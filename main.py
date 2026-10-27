@@ -6,10 +6,10 @@ from collections import Counter
 def list_difference(list1, list2):
     counter1 = Counter(list1)
     counter2 = Counter(list2)
-    
+
     counter1.subtract(counter2)
     result = list(counter1.elements())
-    
+
     return result
 
 @lru_cache(None)
@@ -18,30 +18,30 @@ def optimize_bag(n, dist, bag = tuple()):
     if n == 0:
         # No more items in list
         return dist, []
-    
+
     if bag[n] > dist:
         # This current item is bigger than the distance - cannot be removed
         return optimize_bag(n - 1, dist, bag=bag)
-    
+
     # Calculate 2 options:
     # Option 1: Do not remove the nth item
     dist_n, list_n = optimize_bag(n - 1, dist, bag=bag)
-    
+
     # Option 2: Remove the nth item
     dist_no_n, list_no_n = optimize_bag(n - 1, dist - bag[n], bag=bag)
     dist_no_n -= bag[n]
-    
+
     # Return minimum distance
     # remove item if it makes no differece too
-    if dist_no_n <= dist_n: 
+    if dist_no_n <= dist_n:
         return dist_no_n, list_no_n + [bag[n]]
     else:
         return dist_n, list_n
 
-class LethalCompanySalesOptimizer:
+class MOSS:
     def __init__(self, root):
         self.root = root
-        self.root.title("Lethal Company Sales Optimizer")
+        self.root.title("Minumum Oversheet Subset Sum")
 
         self.prompt_label_numbers = tk.Label(root, text="Enter a list of numbers separated by commas:")
         self.prompt_label_numbers.pack()
@@ -68,7 +68,7 @@ class LethalCompanySalesOptimizer:
 
     def on_enter(self, event):
         self.on_submit()
-        
+
     def on_submit(self):
         # Get the input from the entry widget
         input_text = self.entry_numbers.get()
@@ -91,7 +91,8 @@ class LethalCompanySalesOptimizer:
             target = float(target)
 
         # Sort the bag and initialize variables
-        bag_list = sorted(bag_list)
+        # Sorting determines the order in which items are selected in
+        bag_list = sorted(bag_list, reverse=True)
         print(bag_list)
         n = len(bag_list)
         total_sum = sum(bag_list)
@@ -105,7 +106,7 @@ class LethalCompanySalesOptimizer:
         if sum(bag_list)<target:
             self.result_label.config(text=f"Sum of item values are too low: {sum(bag_list)}")
             return
-        
+
         try:
             # Do calculations
             optimize_bag.cache_clear()
@@ -121,5 +122,5 @@ class LethalCompanySalesOptimizer:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = LethalCompanySalesOptimizer(root)
+    app = MOSS(root)
     root.mainloop()
