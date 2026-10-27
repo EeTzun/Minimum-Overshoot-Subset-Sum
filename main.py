@@ -41,7 +41,7 @@ def optimize_bag(n, dist, bag = tuple()):
 class MOSS:
     def __init__(self, root):
         self.root = root
-        self.root.title("Minumum Oversheet Subset Sum")
+        self.root.title("Minumum Oversoot Subset Sum")
 
         self.prompt_label_numbers = tk.Label(root, text="Enter a list of numbers separated by commas:")
         self.prompt_label_numbers.pack()
